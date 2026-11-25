@@ -10,6 +10,7 @@ final class QueryFiltersServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(QueryFilter::class, static fn (): QueryFilter => new QueryFilter());
+        // QueryFilter is a mutable fluent builder; each resolution must be isolated.
+        $this->app->bind(QueryFilter::class, static fn (): QueryFilter => new QueryFilter());
     }
 }
